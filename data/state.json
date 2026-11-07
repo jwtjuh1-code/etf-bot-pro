@@ -1,0 +1,93 @@
+{
+  "version": "2.0",
+  "ticker": "VWCE.DE",
+  "processed_days": 1,
+  "last_processed_date": "2026-11-06",
+  "accounts": {
+    "SMA200": {
+      "cash": 0.0,
+      "units": 6.0238845939527454,
+      "trades": [
+        {
+          "date": "2026-11-06",
+          "side": "KOOP",
+          "price": 165.84,
+          "units": 6.023885,
+          "fee": 1.0,
+          "reason": "Koers boven SMA200"
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-11-06",
+          "equity": 999.0
+        }
+      ],
+      "equity": 999.0,
+      "return_eur": -1.0,
+      "return_percent": -0.1
+    },
+    "RSI": {
+      "cash": 1000.0,
+      "units": 0.0,
+      "trades": [],
+      "history": [
+        {
+          "date": "2026-11-06",
+          "equity": 1000.0
+        }
+      ],
+      "equity": 1000.0,
+      "return_eur": 0.0,
+      "return_percent": 0.0
+    },
+    "COMBI": {
+      "cash": 0.0,
+      "units": 6.0238845939527454,
+      "trades": [
+        {
+          "date": "2026-11-06",
+          "side": "KOOP",
+          "price": 165.84,
+          "units": 6.023885,
+          "fee": 1.0,
+          "reason": "Boven SMA200 en RSI onder 40"
+        }
+      ],
+      "history": [
+        {
+          "date": "2026-11-06",
+          "equity": 999.0
+        }
+      ],
+      "equity": 999.0,
+      "return_eur": -1.0,
+      "return_percent": -0.1
+    }
+  },
+  "daily": [
+    {
+      "date": "2026-11-06",
+      "price": 165.84,
+      "sma200": 160.1406,
+      "rsi14": 35.04
+    }
+  ],
+  "started_at": "2026-11-07T10:07:46.815519+00:00",
+  "latest_date": "2026-11-06",
+  "latest_price": 165.84,
+  "latest_sma200": 160.1406,
+  "latest_rsi14": 35.04,
+  "progress_percent": 3.3,
+  "status": "Paper trading actief",
+  "strategy_descriptions": {
+    "SMA200": "Koop boven SMA200; verkoop eronder",
+    "RSI": "Koop bij RSI < 30; verkoop bij RSI > 70",
+    "COMBI": "Koop boven SMA200 met RSI < 40; verkoop onder SMA200 of RSI > 70"
+  },
+  "warnings": [
+    "Alle transacties zijn virtueel; er worden geen echte orders geplaatst.",
+    "Yahoo Finance/yfinance is een onofficiële koersbron en kan vertraagd of onbeschikbaar zijn.",
+    "Dertig beursdagen is een korte test en bewijst geen toekomstige winstgevendheid."
+  ]
+}

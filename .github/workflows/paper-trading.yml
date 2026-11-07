@@ -1,0 +1,65 @@
+
+name: ETF Bot Pro 2.0
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "20 18 * * 1-5"
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: etf-bot-pro
+  cancel-in-progress: false
+
+jobs:
+  run-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install packages
+        run: pip install -r requirements.txt
+
+      - name: Run ETF bot
+        run: python bot.py
+
+      - name: Save bot data
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/state.json
+          git diff --cached --quiet || git commit -m "Update ETF paper trading data"
+          git push
+
+      - name: Prepare website
+        run: |
+          mkdir -p public/data
+          cp index.html public/index.html
+          cp data/state.json public/data/state.json
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload website
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+      - name: Publish website
+        uses: actions/deploy-pages@v4

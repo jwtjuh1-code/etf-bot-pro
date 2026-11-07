@@ -1,0 +1,38 @@
+{
+  "version": "2.0",
+  "ticker": "VWCE.DE",
+  "processed_days": 0,
+  "progress_percent": 0,
+  "status": "Nog niet gestart — voer de eerste workflow uit via GitHub Actions.",
+  "last_processed_date": null,
+  "accounts": {
+    "SMA200": {
+      "cash": 1000,
+      "units": 0,
+      "equity": 1000,
+      "return_eur": 0,
+      "return_percent": 0,
+      "trades": [],
+      "history": []
+    },
+    "RSI": {
+      "cash": 1000,
+      "units": 0,
+      "equity": 1000,
+      "return_eur": 0,
+      "return_percent": 0,
+      "trades": [],
+      "history": []
+    },
+    "COMBI": {
+      "cash": 1000,
+      "units": 0,
+      "equity": 1000,
+      "return_eur": 0,
+      "return_percent": 0,
+      "trades": [],
+      "history": []
+    }
+  },
+  "daily": []
+}

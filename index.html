@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827"><title>ETF Bot Pro 2.0</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#151f30;--muted:#9aabc2;--text:#f4f7fb;--accent:#63d6a5;--line:#29364a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:24px 18px 18px;background:#101a2b;border-bottom:1px solid var(--line)}h1{font-size:25px;margin:0 0 6px}h2{font-size:18px;margin:0 0 14px}.muted{color:var(--muted);font-size:13px}
+main{max-width:900px;margin:auto;padding:16px;display:grid;gap:14px}.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{background:#0e1828;border-radius:12px;padding:12px}.metric span{display:block;color:var(--muted);font-size:12px}.metric strong{display:block;font-size:20px;margin-top:5px}
+.cards{display:grid;gap:10px}.strategy{border:1px solid var(--line);border-radius:12px;padding:13px}.strategy h3{margin:0 0 5px;font-size:16px}.positive{color:var(--accent)}.negative{color:#ff8b8b}
+progress{width:100%;height:12px;accent-color:var(--accent)}canvas{width:100%;height:220px;display:block}table{width:100%;border-collapse:collapse;font-size:13px}td,th{text-align:left;padding:9px 5px;border-bottom:1px solid var(--line)}th{color:var(--muted);font-weight:500}.notice{font-size:12px;line-height:1.5;color:var(--muted)}
+@media(min-width:650px){.cards{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:repeat(4,1fr)}}
+</style></head><body>
+<header><h1>ETF Bot Pro 2.0</h1><div class="muted">VWCE · automatisch paper traden · virtueel startkapitaal</div></header>
+<main>
+<section class="panel"><h2>Marktstatus</h2><div class="grid">
+<div class="metric"><span>Laatste koers</span><strong id="price">—</strong></div><div class="metric"><span>Koersdatum</span><strong id="date">—</strong></div>
+<div class="metric"><span>RSI (14)</span><strong id="rsi">—</strong></div><div class="metric"><span>SMA (200)</span><strong id="sma">—</strong></div></div><p class="muted" id="status">Gegevens laden…</p></section>
+<section class="panel"><h2>30 beursdagen leerfase</h2><progress id="progress" value="0" max="100"></progress><p class="muted" id="progressText">0 van 30 beursdagen verwerkt</p></section>
+<section class="panel"><h2>Strategieën vergelijken</h2><div class="cards" id="strategies"></div></section>
+<section class="panel"><h2>Vermogensontwikkeling</h2><canvas id="chart" width="800" height="260"></canvas><p class="muted">Elke strategie heeft een eigen virtuele startrekening van €1.000.</p></section>
+<section class="panel"><h2>Laatste transacties</h2><div style="overflow-x:auto"><table><thead><tr><th>Strategie</th><th>Datum</th><th>Actie</th><th>Koers</th><th>Aantal</th></tr></thead><tbody id="trades"><tr><td colspan="5">Nog geen transacties</td></tr></tbody></table></div></section>
+<section class="panel"><h2>Uitleg en beperkingen</h2><p class="notice">SMA200 koopt boven het 200-daags gemiddelde en verkoopt eronder. RSI koopt onder 30 en verkoopt boven 70. COMBI combineert beide. Dit is een vaste-regelvergelijker, geen zelfstandig lerend AI-model.</p><p class="notice">De 30 beursdagen vormen een korte paper-tradingtest, geen bewijs van toekomstige winstgevendheid. Koersdata komt via yfinance van Yahoo Finance, een onofficiële bron. GitHub Actions kan geplande taken vertragen of tijdelijk niet uitvoeren. Er is geen brokerkoppeling en er worden geen echte orders geplaatst.</p></section>
+</main>
+<script>
+const eur=n=>n==null?'—':new Intl.NumberFormat('nl-NL',{style:'currency',currency:'EUR'}).format(n),pct=n=>(n>0?'+':'')+Number(n||0).toFixed(2)+'%';
+async function load(){try{const r=await fetch('./data/state.json?t='+Date.now());if(!r.ok)throw Error('Nog geen gegevens beschikbaar');const s=await r.json();
+document.getElementById('price').textContent=eur(s.latest_price);document.getElementById('date').textContent=s.latest_date||'—';document.getElementById('rsi').textContent=s.latest_rsi14??'—';document.getElementById('sma').textContent=eur(s.latest_sma200);document.getElementById('status').textContent=s.status||'—';document.getElementById('progress').value=s.progress_percent||0;document.getElementById('progressText').textContent=`${s.processed_days||0} van 30 beursdagen verwerkt`;
+const box=document.getElementById('strategies');box.innerHTML='';Object.entries(s.accounts||{}).forEach(([n,a])=>{const d=document.createElement('div');d.className='strategy';d.innerHTML=`<h3>${n}</h3><div class="muted">${(s.strategy_descriptions||{})[n]||''}</div><p><strong>${eur(a.equity)}</strong></p><div class="${(a.return_percent||0)>=0?'positive':'negative'}">${pct(a.return_percent)} (${eur(a.return_eur)})</div><div class="muted">Cash: ${eur(a.cash)} · ETF: ${Number(a.units||0).toFixed(5)}</div>`;box.appendChild(d);});
+let rows=[];Object.entries(s.accounts||{}).forEach(([n,a])=>(a.trades||[]).slice(-10).forEach(t=>rows.push({...t,n})));rows.sort((a,b)=>(b.date||'').localeCompare(a.date||''));document.getElementById('trades').innerHTML=rows.length?rows.slice(0,20).map(t=>`<tr><td>${t.n}</td><td>${t.date}</td><td>${t.side}</td><td>${eur(t.price)}</td><td>${Number(t.units).toFixed(5)}</td></tr>`).join(''):'<tr><td colspan="5">Nog geen transacties</td></tr>';draw(s.accounts||{});
+}catch(e){document.getElementById('status').textContent=e.message+'. Start de GitHub-workflow om gegevens op te halen.';}}
+function draw(accounts){const c=document.getElementById('chart'),x=c.getContext('2d');x.clearRect(0,0,c.width,c.height);const sets=Object.entries(accounts).map(([n,a])=>({v:[{equity:1000},...(a.history||[])]})),vals=sets.flatMap(s=>s.v.map(p=>p.equity));if(!vals.length)return;const lo=Math.min(950,...vals),hi=Math.max(1050,...vals),l=55,t=18,w=720,h=205;x.strokeStyle='#34445c';x.beginPath();x.moveTo(l,t);x.lineTo(l,t+h);x.lineTo(l+w,t+h);x.stroke();x.fillStyle='#9aabc2';x.font='12px sans-serif';x.fillText(eur(hi),3,22);x.fillText(eur(lo),3,t+h);['#63d6a5','#7da9ff','#f3c66b'].forEach((col,i)=>{const a=sets[i];if(!a||a.v.length<2)return;x.strokeStyle=col;x.lineWidth=2;x.beginPath();a.v.forEach((p,j)=>{const xx=l+j/Math.max(1,a.v.length-1)*w,yy=t+h-(p.equity-lo)/(hi-lo||1)*h;j?x.lineTo(xx,yy):x.moveTo(xx,yy)});x.stroke();});}
+load();setInterval(load,300000);
+</script></body></html>

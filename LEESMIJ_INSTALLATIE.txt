@@ -1,0 +1,40 @@
+ETF BOT PRO 2.0 — INSTALLATIE OP IPHONE
+
+INHOUD
+- index.html: iPhone-dashboard
+- bot.py: paper-tradinglogica
+- GitHub Actions: geplande dagelijkse uitvoering en publicatie
+- data/state.json: virtuele rekeningen en voortgang
+
+LET OP
+Dit pakket plaatst geen echte orders en heeft geen brokerkoppeling.
+Het is een vaste-regelvergelijker, geen zelflerend AI-model.
+De 30 beursdagen vormen een korte test, geen bewijs van toekomstige winstgevendheid.
+Yahoo Finance/yfinance is een onofficiële koersbron; data kan vertraagd of tijdelijk ontbreken.
+GitHub Actions kan geplande taken vertragen. Gratis voorwaarden en limieten kunnen veranderen.
+Elke strategie krijgt een eigen virtuele rekening van €1.000.
+
+INSTALLATIE
+1. Open https://github.com in Safari en maak een gratis account aan of log in.
+2. Kies + > New repository. Naam: etf-bot-pro. Kies Public voor deze eenvoudige gratis Pages-configuratie.
+3. Maak de repository aan.
+4. In de repository: Add file > Upload files. Upload alle uitgepakte bestanden en mappen naar de hoofdmap, niet alleen de ZIP.
+5. Open Settings > Actions > General. Bij Workflow permissions kies Read and write permissions en sla op.
+6. Open Settings > Pages. Kies als bron GitHub Actions.
+7. Open Actions > ETF Bot Pro - paper trading > Run workflow. Start de eerste run.
+8. Na een geslaagde run staat onder Settings > Pages de dashboardlink.
+9. Open de link in Safari. Tik op Deel > Zet op beginscherm.
+
+AUTOMATISCH
+De workflow staat gepland op werkdagen om 18:20 UTC: 19:20 Nederlandse wintertijd en 20:20 zomertijd. GitHub kan later starten. Een koersdatum wordt maximaal één keer verwerkt.
+
+STRATEGIEËN
+SMA200: koopt boven het 200-daags gemiddelde; verkoopt eronder.
+RSI: koopt bij RSI lager dan 30; verkoopt bij RSI hoger dan 70.
+COMBI: koopt boven SMA200 met RSI lager dan 40; verkoopt onder SMA200 of bij RSI hoger dan 70.
+
+RESET
+Vervang data/state.json door het meegeleverde lege bestand en commit de wijziging om de test te resetten. Bewaar eerst een kopie als je oude resultaten wilt houden.
+
+PROBLEMEN
+Controleer Actions en open de laatste run. Deel nooit je GitHub-wachtwoord of persoonlijke toegangstoken.

@@ -1,8 +1,8 @@
 {
   "version": "2.0",
   "ticker": "VWCE.DE",
-  "processed_days": 1,
-  "last_processed_date": "2026-11-06",
+  "processed_days": 2,
+  "last_processed_date": "2026-11-09",
   "accounts": {
     "SMA200": {
       "cash": 0.0,
@@ -21,11 +21,15 @@
         {
           "date": "2026-11-06",
           "equity": 999.0
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 1008.52
         }
       ],
-      "equity": 999.0,
-      "return_eur": -1.0,
-      "return_percent": -0.1
+      "equity": 1008.52,
+      "return_eur": 8.52,
+      "return_percent": 0.85
     },
     "RSI": {
       "cash": 1000.0,
@@ -34,6 +38,10 @@
       "history": [
         {
           "date": "2026-11-06",
+          "equity": 1000.0
+        },
+        {
+          "date": "2026-11-09",
           "equity": 1000.0
         }
       ],
@@ -58,11 +66,15 @@
         {
           "date": "2026-11-06",
           "equity": 999.0
+        },
+        {
+          "date": "2026-11-09",
+          "equity": 1008.52
         }
       ],
-      "equity": 999.0,
-      "return_eur": -1.0,
-      "return_percent": -0.1
+      "equity": 1008.52,
+      "return_eur": 8.52,
+      "return_percent": 0.85
     }
   },
   "daily": [
@@ -71,14 +83,20 @@
       "price": 165.84,
       "sma200": 160.1406,
       "rsi14": 35.04
+    },
+    {
+      "date": "2026-11-09",
+      "price": 167.42,
+      "sma200": 160.2419,
+      "rsi14": 41.79
     }
   ],
   "started_at": "2026-11-07T10:07:46.815519+00:00",
-  "latest_date": "2026-11-06",
-  "latest_price": 165.84,
-  "latest_sma200": 160.1406,
-  "latest_rsi14": 35.04,
-  "progress_percent": 3.3,
+  "latest_date": "2026-11-09",
+  "latest_price": 167.42,
+  "latest_sma200": 160.2419,
+  "latest_rsi14": 41.79,
+  "progress_percent": 6.7,
   "status": "Paper trading actief",
   "strategy_descriptions": {
     "SMA200": "Koop boven SMA200; verkoop eronder",

@@ -1,12 +1,12 @@
 {
   "version": "2.0",
   "ticker": "VWCE.DE",
-  "processed_days": 13,
-  "last_processed_date": "2026-11-24",
+  "processed_days": 14,
+  "last_processed_date": "2026-11-25",
   "accounts": {
     "SMA200": {
-      "cash": 0.0,
-      "units": 5.8042172466341135,
+      "cash": 920.3241231025216,
+      "units": 0.0,
       "trades": [
         {
           "date": "2026-11-06",
@@ -31,6 +31,14 @@
           "units": 5.804217,
           "fee": 0.96,
           "reason": "Koers boven SMA200"
+        },
+        {
+          "date": "2026-11-25",
+          "side": "VERKOOP",
+          "price": 158.72,
+          "units": 5.804217,
+          "fee": 0.92,
+          "reason": "Koers onder SMA200"
         }
       ],
       "history": [
@@ -85,11 +93,15 @@
         {
           "date": "2026-11-24",
           "equity": 939.59
+        },
+        {
+          "date": "2026-11-25",
+          "equity": 920.32
         }
       ],
-      "equity": 939.59,
-      "return_eur": -60.41,
-      "return_percent": -6.04
+      "equity": 920.32,
+      "return_eur": -79.68,
+      "return_percent": -7.97
     },
     "RSI": {
       "cash": 0.0,
@@ -156,15 +168,19 @@
         {
           "date": "2026-11-24",
           "equity": 1014.93
+        },
+        {
+          "date": "2026-11-25",
+          "equity": 995.11
         }
       ],
-      "equity": 1014.93,
-      "return_eur": 14.93,
-      "return_percent": 1.49
+      "equity": 995.11,
+      "return_eur": -4.89,
+      "return_percent": -0.49
     },
     "COMBI": {
-      "cash": 0.0,
-      "units": 5.917518819629451,
+      "cash": 938.289365680845,
+      "units": 0.0,
       "trades": [
         {
           "date": "2026-11-06",
@@ -189,6 +205,14 @@
           "units": 5.917519,
           "fee": 0.96,
           "reason": "Boven SMA200 en RSI onder 40"
+        },
+        {
+          "date": "2026-11-25",
+          "side": "VERKOOP",
+          "price": 158.72,
+          "units": 5.917519,
+          "fee": 0.94,
+          "reason": "Onder SMA200 of RSI boven 70"
         }
       ],
       "history": [
@@ -243,11 +267,15 @@
         {
           "date": "2026-11-24",
           "equity": 957.93
+        },
+        {
+          "date": "2026-11-25",
+          "equity": 938.29
         }
       ],
-      "equity": 957.93,
-      "return_eur": -42.07,
-      "return_percent": -4.21
+      "equity": 938.29,
+      "return_eur": -61.71,
+      "return_percent": -6.17
     }
   },
   "daily": [
@@ -328,14 +356,20 @@
       "price": 161.88,
       "sma200": 161.2651,
       "rsi14": 36.97
+    },
+    {
+      "date": "2026-11-25",
+      "price": 158.72,
+      "sma200": 161.3195,
+      "rsi14": 37.86
     }
   ],
   "started_at": "2026-11-07T10:07:46.815519+00:00",
-  "latest_date": "2026-11-24",
-  "latest_price": 161.88,
-  "latest_sma200": 161.2651,
-  "latest_rsi14": 36.97,
-  "progress_percent": 43.3,
+  "latest_date": "2026-11-25",
+  "latest_price": 158.72,
+  "latest_sma200": 161.3195,
+  "latest_rsi14": 37.86,
+  "progress_percent": 46.7,
   "status": "Paper trading actief",
   "strategy_descriptions": {
     "SMA200": "Koop boven SMA200; verkoop eronder",
